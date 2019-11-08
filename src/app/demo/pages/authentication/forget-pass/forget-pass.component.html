@@ -1,0 +1,36 @@
+<!-- <p>forget-pass works!</p> -->
+<form [formGroup]="angForm" >
+
+<div class="auth-wrapper">
+  <div class="auth-content">
+    <div class="auth-bg">
+      <span class="r"></span>
+      <span class="r s"></span>
+      <span class="r s"></span>
+      <span class="r"></span>
+    </div>
+    <div class="card">
+      <div class="card-body text-center">
+        <div class="mb-4">
+          <i class="feather icon-unlock auth-icon"></i>
+        </div>
+        <h3 class="mb-4">Forget Password</h3>
+        <div class="input-group mb-3">
+          <input type="email" class="form-control" placeholder="Email" formControlName="email">
+        </div>
+        <div *ngIf="angForm.controls['email'].invalid && (angForm.controls['email'].dirty || angForm.controls['email'].touched)" class="alert alert-danger">
+          <div *ngIf="angForm.controls['email'].errors.required">
+            Email is required 
+          </div>
+         enter valid email
+        </div>
+        
+        
+        
+        <button class="btn btn-primary mb-4" (click)="onSubmit(angForm.value)" [disabled]="!angForm.valid">ok
+        </button>    
+      </div>
+    </div>
+  </div>
+</div>
+</form>

@@ -1,0 +1,516 @@
+<!-- <ng-http-loader 
+    [backdrop]="false"
+    [backgroundColor]="'#ff0000'"
+    [debounceDelay]="100"
+    [extraDuration]="300"
+    [minDuration]="300"
+    [opacity]=".6"
+    [spinner]="spinkit.skWave">
+</ng-http-loader>
+
+ -->
+ <!-- <app-loader></app-loader> -->
+
+ 
+
+
+<app-confirmation-dialog></app-confirmation-dialog>  
+<!-- <app-loader ></app-loader> -->
+
+<div class="row">
+  <!-- <div class="col-xl-12">
+    <app-card cardTitle="Basic Table" [options]="false" blockClass="table-border-style">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Username</th> 
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+  </div> -->
+  <div class="col-xl-12">
+    <app-card cardTitle="User Table" [options]="false" blockClass="table-border-style">
+      <div class="table-responsive">
+          <div class="search-hero">
+              <!-- <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="&#61442;  Start searching for a hero by id or name or country"> -->
+              <input #value>  
+              <button (click)="Search(value.value)">Search</button>
+            </div>
+        <table class="table table-hover" >
+          <thead>
+          <tr>
+            <th>S.No</th>
+            <th> Name</th>
+            <th>Email</th>
+            <th>Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let user of users  | filter:searchText let i = index;">
+            <th scope="row">{{i+1}}</th>
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td><button (click)="editUser(user._id)"  class="btn btn-primary">Edit</button></td>
+
+            <!-- <td><a  [routerLink]="['/tables/reset', user._id]" class="btn btn-primary">Edit</a></td> -->
+            <!-- <ng-http-loader spinner="sk-wave"><td></ng-http-loader> -->
+             <td> <button  class="btn btn-danger" (click)="showDialog(user._id)" >Delete</button></td>
+            
+
+            <!-- <td><button  class="btn btn-danger" (click)="openDialog(user._id)" >Delete</button></td> -->
+            <!-- <button mat-button (click)="openDialog()" class="btn btn-danger">Confirm box</button> -->
+            <!-- <button class="btn btn-primary pull-right" (click)="showDialog()">Show Dialog</button>   -->
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td colspan="2">
+  
+                        <div class="btn-group mr-2"  *ngFor="let item of arrayOne(8); let i = index;">
+                          <button type="button" class="btn btn-secondary" (click)="pagesize(i+1)">{{i+1}}</button>
+                          <!-- <button type="button" class="btn btn-secondary" (click)="pagesize(i+1)">{{i+1}}</button> -->
+                        </div>
+                       
+                
+            </td>
+          </tr>
+         
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+    
+  </div>
+
+  <!-- <div class="col-xl-12">
+    <app-card cardTitle="Dark Table" [options]="false" blockClass="table-border-style">
+      <div class="table-responsive">
+        <table class="table table-dark">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Username</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-12">
+    <app-card cardTitle="Striped Table" [options]="false" blockClass="table-border-style">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Username</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-12">
+    <app-card cardTitle="Contextual Classes" [options]="false" blockClass="table-border-style">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Username</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="table-active">
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr class="table-success">
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+          <tr>
+            <th scope="row">4</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+          <tr class="table-warning">
+            <th scope="row">5</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+          <tr>
+            <th scope="row">6</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+          <tr class="table-danger">
+            <th scope="row">7</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+          <tr>
+            <th scope="row">8</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+          <tr class="table-info">
+            <th scope="row">9</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-12">
+    <app-card cardTitle="Background Utilities" [options]="false" blockClass="table-border-style">
+      <div class="table-responsive">
+        <table class="table table-inverse">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Username</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="bg-primary">
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr class="bg-success">
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+          <tr>
+            <th scope="row">4</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+          <tr class="bg-warning">
+            <th scope="row">5</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+          <tr>
+            <th scope="row">6</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+          <tr class="bg-danger">
+            <th scope="row">7</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+          <tr>
+            <th scope="row">8</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+          <tr class="bg-info">
+            <th scope="row">9</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-12">
+    <app-card cardTitle="Extra Large Table" [options]="false" blockClass="table-border-style">
+      <div class="table-responsive">
+        <table class="table table-xl">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Username</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-12">
+    <app-card cardTitle="Vertical Borders" [options]="false" blockClass="table-border-style">
+      <div class="table-responsive">
+        <table class="table table-columned">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Username</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-12">
+    <app-card cardTitle="Table Header Styling" [options]="false" blockClass="table-border-style">
+      <div class="table-responsive">
+        <table class="table table-styling">
+          <thead>
+          <tr class="table-primary">
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Username</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-12">
+    <app-card cardTitle="Table Footer Styling" [options]="false" blockClass="table-border-style">
+      <div class="table-responsive">
+        <table class="table table-styling">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Username</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+          </tbody>
+          <tfoot class="table-info">
+          <tr>
+            <th scope="row">#</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+          </tfoot>
+        </table>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-12">
+    <app-card cardTitle="Custom Table Color" [options]="false" blockClass="table-border-style">
+      <div class="table-responsive">
+        <table class="table table-styling table-info">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Username</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+  </div>
+</div> -->

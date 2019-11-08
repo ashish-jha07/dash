@@ -1,0 +1,118 @@
+<!-- <app-loader></app-loader> -->
+<!-- <mat-spinner  ></mat-spinner> -->
+<div class="container">
+    <div class="row m-y-2">
+        <!-- edit form column -->
+        <div class="col-lg-4 text-lg-center">
+            <h2>Edit Profile</h2>
+        </div>
+        
+        <div class="col-lg-8" *ngIf='true'>
+            <!-- <div class="alert alert-info alert-dismissable"> <a class="panel-close close" data-dismiss="alert">×</a>
+                This is an <strong>.alert</strong>. Use this to show important messages to the user.
+            </div> -->
+            <div class="m-x-auto img-fluid img-circle" >
+              <h1>user image</h1>  
+              <h3>Choose File</h3>            
+              <div class="form-group" >
+                  <input type="file" name="image" (change)="fileProgress($event)"  accept="image/png, image/jpeg"/>
+              </div>
+              <div class="image-preview m-x-auto img-fluid img-circle" *ngIf="previewUrl">
+                    <img [src]="previewUrl" height="200" width="200" />                 
+                </div>
+                <img [src]="filePath" height="200" width="200" *ngIf="!previewUrl"  />
+            </div>
+        </div>
+        <div class="col-lg-8 push-lg-4 personal-info" >
+                <form [formGroup]="angForm" enctype="multipart/form-data">
+
+             <!-- <form role="form"> -->
+                    
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Full name</label>
+                    <div class="col-lg-9">
+                        <input class="form-control" type="text"     formControlName="name" />
+                    </div>
+                </div>
+                <div *ngIf="angForm.controls['name'].invalid && (angForm.controls['name'].dirty || angForm.controls['name'].touched)" class="alert alert-danger">
+                        <div *ngIf="angForm.controls['name'].errors.required">
+                          name is required
+                        </div>
+                        
+                      </div>
+              
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Email</label>
+                    <div class="col-lg-9">
+                        <input class="form-control" type="email"  formControlName="email"/>
+                    </div>
+                </div>
+                <div *ngIf="angForm.controls['email'].invalid && (angForm.controls['email'].dirty || angForm.controls['email'].touched)" class="alert alert-danger">
+                        <div *ngIf="angForm.controls['email'].errors.required">
+                          Email is required 
+                        </div>
+                       enter valid email
+                </div>
+                
+                <!-- <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Password</label>
+                    <div class="col-lg-9">
+                        <input class="form-control" type="password" value="11111122333" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Confirm password</label>
+                    <div class="col-lg-9">
+                        <input class="form-control" type="password" value="11111122333" />
+                    </div>
+                </div> -->
+                
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label"></label>
+                    <div class="col-lg-9">
+                        <!-- <input type="reset" class="btn btn-secondary" value="Cancel" /> -->
+                        <button  [routerLink]="['/User/userDefaul']" class="btn btn-primary mb-4">Cancel</button>
+
+                        <!-- <a  type="button" class="btn btn-primary" (click)="updateUser(user)"   (click)="onSubmit(angForm.value)"> Save </a> -->
+                        <button class="btn btn-primary mb-4" (click)="updateUser(angForm.value)" >Save</button>
+                        <!-- [disabled]="!angForm.valid" -->
+                        
+                    </div>
+                </div>
+                <div class="col-lg-4 pull-lg-8 text-xs-center">
+                    <!-- <img src="//placehold.it/150" class="m-x-auto img-fluid img-circle" alt="avatar" /> -->
+                   
+                   
+                   
+                   
+                    
+                    
+                    <!-- <h6 class="m-t-2">Upload a different photo</h6> -->
+                    
+                    <div *ngIf="fileUploadProgress">
+                        Upload progress: {{ fileUploadProgress }}
+                    </div>
+                    <!-- <div class="image-preview mb-3" *ngIf="previewUrl">
+                        <img [src]="previewUrl" height="300" />                 
+                    </div> -->
+         
+                    <div class="mb-3" *ngIf="uploadedFilePath">
+                        {{uploadedFilePath}}
+                    </div>
+                     
+                    <!-- <div class="form-group">
+                        <button class="btn btn-primary"  (click)="onSubmit()">Submit</button>
+                    </div> -->
+                    <!-- <div>
+                        <img [src]="filePath">
+
+                    </div> -->
+            </div>
+            
+            </form>
+        </div>
+    
+        
+    </div>
+</div>
+<hr />
